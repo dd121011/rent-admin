@@ -79,8 +79,8 @@
             var jhxhr = $.ajax({url: "${base}/login", data: JSON.stringify(params), contentType: 'application/json', type: "POST"});
             jhxhr.done(function (res) {
                 if(res.code == 1){
-                    $.cookie("rent_admin_tokenId",res.data.tokenId,{expires: 7, path: '/rent'});
-                    $.cookie("rent_admin_userId",res.data.userId,{expires: 7, path: '/rent'});
+                    $.cookie("rent_admin_tokenId",res.data.tokenId,{expires: 7, path: '/rent-admin'});
+                    $.cookie("rent_admin_userId",res.data.userId,{expires: 7, path: '/rent-admin'});
                     window.location.href = requestBaseUrl +  "/goHome/" + res.data.userId + "?tokenId=" + res.data.tokenId;
                 }else{
                     layer.alert(res.message);

@@ -20,7 +20,7 @@ public class Admin extends BaseEntity {
     private static final long serialVersionUID = -6214789611403495734L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer accountId;//主键
+    private Integer adminId;//主键
     private String username;//用户名
     private String pwd;//密码
     private String name;//姓名

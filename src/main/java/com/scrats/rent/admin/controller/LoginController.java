@@ -2,8 +2,8 @@ package com.scrats.rent.admin.controller;
 
 import com.scrats.rent.admin.common.JsonResult;
 import com.scrats.rent.admin.common.annotation.IgnoreSecurity;
-import com.scrats.rent.admin.entity.Account;
-import com.scrats.rent.admin.service.AccountService;
+import com.scrats.rent.admin.entity.Admin;
+import com.scrats.rent.admin.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
 
     @Autowired
-    private AccountService accountService;
+    private AdminService adminService;
 
     @IgnoreSecurity
     @PostMapping("/login")
     @ResponseBody
-    public JsonResult login(@RequestBody Account account) {
+    public JsonResult login(@RequestBody Admin admin) {
 
-        return accountService.login(account.getUsername(), account.getPwd());
+        return adminService.login(admin.getUsername(), admin.getPwd());
     }
 
 }
