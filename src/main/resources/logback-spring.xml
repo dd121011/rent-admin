@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="false">
-    <contextName>rentAdmin</contextName>
+    <contextName>rent-admin</contextName>
     <property name="log.path" value="logs"/><!--部署的时候最好改为绝对位置-->
     <springProfile name="release">
         <!--配置打印sql-->
-        <property name="log.path" value="/var/log/rentAdmin"/>
+        <property name="log.path" value="/var/log/rent-admin"/>
     </springProfile>
     <!--控制台日志输出配置-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
