@@ -6,7 +6,7 @@ import com.scrats.rent.admin.common.APIRequest;
 import com.scrats.rent.admin.common.annotation.IgnoreSecurity;
 import com.scrats.rent.admin.common.exception.BusinessException;
 import com.scrats.rent.admin.common.exception.NotAuthorizedException;
-import com.scrats.rent.admin.entity.User;
+import com.scrats.rent.admin.entity.Admin;
 import com.scrats.rent.admin.util.IOUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -61,27 +61,27 @@ public class AuthenticationInterceptor  implements HandlerInterceptor {
         }
 
         String token = httpServletRequest.getHeader("tokenId");
-        String userId = httpServletRequest.getHeader("userId");
+        String adminId = httpServletRequest.getHeader("userId");
         String json = IOUtil.getInputStreamAsText(httpServletRequest.getInputStream(),"UTF-8");
         logger.debug("token: " + token);
         if (StringUtils.isBlank(token)) {
             throw new NotAuthorizedException("非法请求, 请登陆");
         }
-        if (StringUtils.isBlank(userId)) {
+        if (StringUtils.isBlank(adminId)) {
             throw new NotAuthorizedException("非法请求, 请登陆");
         }
         APIRequest apiRequest = JSON.parseObject(json,APIRequest.class);
         if(null == apiRequest){
             apiRequest = new APIRequest();
         }
-        User user = (User) redisService.get(token);
-        if(null == user){
+        Admin admin = (Admin) redisService.get(token);
+        if(null == admin){
             throw new BusinessException("请求的tokenId无效, 请重新获取");
         }
-        if(!userId.equals(user.getUserId().toString())){
+        if(!adminId.equals(admin.getAdminId().toString())){
             throw new BusinessException("请求的tokenId和userId验证不通过");
         }
-        apiRequest.setUser(user);
+        apiRequest.setAdmin(admin);
         apiRequest.setTokenId(token);
 
         httpServletRequest.setAttribute("apiRequest", apiRequest);

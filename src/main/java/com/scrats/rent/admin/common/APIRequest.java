@@ -1,7 +1,7 @@
 package com.scrats.rent.admin.common;
 
 import com.scrats.rent.admin.common.exception.BusinessException;
-import com.scrats.rent.admin.entity.User;
+import com.scrats.rent.admin.entity.Admin;
 import com.scrats.rent.admin.util.BaseUtil;
 import lombok.Data;
 import lombok.ToString;
@@ -23,12 +23,8 @@ public class APIRequest {
     private int page = 1;
     private int rows = 10;
     private String searchText;//搜索内容
-    private User user;
+    private Admin admin;
     private String openid = "";
-    private boolean renterFlag;
-    private boolean landlordFlag;
-    private boolean guardFlag;
-    private boolean adminFlag;
     private boolean administratorFlag;
 
     private Map<String, Object> body;
