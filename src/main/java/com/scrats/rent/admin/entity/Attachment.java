@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Data
 public class Attachment extends BaseEntity {
 
-    private static final long serialVersionUID = -2817612996471911838L;
+    private static final long serialVersionUID = -5260134762054195162L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

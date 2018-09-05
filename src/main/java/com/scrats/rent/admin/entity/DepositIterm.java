@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Data
 public class DepositIterm extends BaseEntity {
 
-    private static final long serialVersionUID = 2180201904798488772L;
+    private static final long serialVersionUID = 8930598616273460607L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

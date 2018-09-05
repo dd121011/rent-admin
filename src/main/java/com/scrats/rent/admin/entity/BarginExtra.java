@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Data
 public class BarginExtra extends BaseEntity {
 
-    private static final long serialVersionUID = -8826252737614873659L;
+    private static final long serialVersionUID = -5959060772113024339L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

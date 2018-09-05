@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Data
 public class RoomRenter extends BaseEntity {
 
-    private static final long serialVersionUID = 3276063863511239753L;
+    private static final long serialVersionUID = -3769254497727740531L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 public class Room extends BaseEntity {
 
-    private static final long serialVersionUID = 8142937416927930896L;
+    private static final long serialVersionUID = -4231058876071774354L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

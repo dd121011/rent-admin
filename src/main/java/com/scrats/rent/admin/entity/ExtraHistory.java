@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 @Data
 public class ExtraHistory extends BaseEntity {
 
-    private static final long serialVersionUID = -6563910655403236128L;
+    private static final long serialVersionUID = 79670974505418388L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

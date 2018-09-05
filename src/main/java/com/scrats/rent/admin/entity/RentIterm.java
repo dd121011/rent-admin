@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Data
 public class RentIterm extends BaseEntity {
 
-    private static final long serialVersionUID = 1309693000238636845L;
+    private static final long serialVersionUID = 1240476513600320059L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

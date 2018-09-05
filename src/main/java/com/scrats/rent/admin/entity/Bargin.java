@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 public class Bargin extends BaseEntity {
 
-    private static final long serialVersionUID = 5489343774578320267L;
+    private static final long serialVersionUID = 3138176866787769484L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

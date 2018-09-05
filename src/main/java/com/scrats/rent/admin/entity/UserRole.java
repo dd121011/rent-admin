@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 @Data
 public class UserRole extends BaseEntity {
 
-    private static final long serialVersionUID = 3121772453614993016L;
+    private static final long serialVersionUID = -4653309083382591351L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

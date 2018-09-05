@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 public class Address extends BaseEntity {
 
-    private static final long serialVersionUID = -6463773379388916653L;
+    private static final long serialVersionUID = 8692769659929702481L;
 
     private int    id;//主键
     private String province;//省

@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Data
 public class BuildingLandlord extends BaseEntity {
 
-    private static final long serialVersionUID = 5056011274302988326L;
+    private static final long serialVersionUID = -9203356373282610924L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

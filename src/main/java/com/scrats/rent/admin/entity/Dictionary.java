@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Data
 public class Dictionary extends BaseEntity {
 
-    private static final long serialVersionUID = 3519803533413277196L;
+    private static final long serialVersionUID = -4812561793843627422L;
 
     @Id
     private String dicCode;//字典类型编号

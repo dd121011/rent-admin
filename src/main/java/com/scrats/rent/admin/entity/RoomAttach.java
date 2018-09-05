@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Data
 public class RoomAttach extends BaseEntity {
 
-    private static final long serialVersionUID = 5785468796010400313L;
+    private static final long serialVersionUID = 4093571068659207467L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

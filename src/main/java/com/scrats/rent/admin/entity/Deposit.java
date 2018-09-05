@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 public class Deposit extends BaseEntity {
 
-    private static final long serialVersionUID = 2180201904798488772L;
+    private static final long serialVersionUID = 1745302216883579467L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

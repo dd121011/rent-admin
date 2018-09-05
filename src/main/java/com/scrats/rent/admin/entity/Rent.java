@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 public class Rent extends BaseEntity {
 
-    private static final long serialVersionUID = 6961570224294320920L;
+    private static final long serialVersionUID = 8935209304779036737L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 public class Building extends BaseEntity {
 
-    private static final long serialVersionUID = -8526366061711633128L;
+    private static final long serialVersionUID = -8113645548318162883L;
 
     @Id
     @KeySql(dialect = IdentityDialect.MYSQL)

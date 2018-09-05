@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 @Data
 public class WxSns extends BaseEntity {
 
-    private static final long serialVersionUID = 3276063863511239753L;
+    private static final long serialVersionUID = -1911246894976456595L;
 
     @Id
     private String openid;//sns openid

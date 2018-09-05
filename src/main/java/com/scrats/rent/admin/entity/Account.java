@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Data
 public class Account extends BaseEntity {
 
-    private static final long serialVersionUID = 7219373609398245913L;
+    private static final long serialVersionUID = 7466923808730866199L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
