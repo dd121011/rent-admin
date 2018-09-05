@@ -13,9 +13,9 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface AccountMapper extends BaseMapper<Account> {
 
-    @Select("select username, pwd, phone, account_id, create_ts, update_ts, delete_ts from account\n" +
-            "    where 1=1 and username = #{username} and pwd = #{pwd}\n" +
-            "    limit 1")
+    @Select("select username, pwd, phone, account_id, create_ts, update_ts, delete_ts from account " +
+            "where 1=1 and username = #{username} and pwd = #{pwd} " +
+            "limit 1")
     Account login(Account account);
 
 }
