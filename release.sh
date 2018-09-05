@@ -16,7 +16,7 @@ scp target/rent-admin.jar root@47.106.212.7:/root/project/RentAdmin/
 
 echo '[restarting]'
 
-#ssh root@47.106.212.7 "sh /root/project/RentAdmin/restart.sh"
+ssh root@47.106.212.7 "sh /root/project/RentAdmin/restart.sh"
 
 echo '[done]'
 
