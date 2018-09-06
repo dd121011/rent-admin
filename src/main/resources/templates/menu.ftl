@@ -16,7 +16,7 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item"><a data-method="dashboardManage" class="scratMenu" href="javascript:;">首页</a></li>
-            <li class="layui-nav-item"><a data-method="buildingManage" class="scratMenu" href="javascript:;">楼盘管理</a></li>
+            <li class="layui-nav-item"><a data-method="landlordManage" class="scratMenu" href="javascript:;">房东管理</a></li>
             <li class="layui-nav-item"><a data-method="roomManage" class="scratMenu"href="javascript:;">房间管理</a></li>
             <li class="layui-nav-item"><a data-method="rentManage" class="scratMenu"href="javascript:;">房租管理</a></li>
             <li class="layui-nav-item">

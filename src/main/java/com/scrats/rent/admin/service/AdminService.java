@@ -15,4 +15,6 @@ import com.scrats.rent.admin.mapper.AdminMapper;
 public interface AdminService extends BaseService<Admin, AdminMapper> {
 
     JsonResult login(String username, String pwd);
+
+    Admin checkLogin(Integer adminId, String tokenId);
 }

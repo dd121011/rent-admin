@@ -8,7 +8,7 @@
 <script src="${base}/static/js/extends/jquery.cookie.js" charset="utf-8"></script>
 <script src="${base}/static/layui/layui.js" charset="utf-8"></script>
 <script src="${base}/static/js/public.js"></script>
-<script src="${base}/static/js/landlord/common.js"></script>
+<script src="${base}/static/js/admin/common.js"></script>
 
 
 <div id="userPwdCheckDiv" style="padding-top: 20px; padding-right: 40px; display: none" >

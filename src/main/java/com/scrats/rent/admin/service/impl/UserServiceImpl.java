@@ -1,7 +1,9 @@
 package com.scrats.rent.admin.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.scrats.rent.admin.base.service.BaseServiceImpl;
 import com.scrats.rent.admin.common.JsonResult;
+import com.scrats.rent.admin.common.PageInfo;
 import com.scrats.rent.admin.common.exception.BusinessException;
 import com.scrats.rent.admin.entity.User;
 import com.scrats.rent.admin.mapper.UserMapper;
@@ -46,6 +48,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
     @Override
     public List<User> getListByUser(User user) {
         return dao.getListByUser(user);
+    }
+
+    @Override
+    public PageInfo<User> getPagerByUser(int page, int rows, User user) {
+        PageHelper.startPage(page, rows);
+        List<User> list = dao.getListByUser(user);
+        return new PageInfo<User>(list);
     }
 
 }

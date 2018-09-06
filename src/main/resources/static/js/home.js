@@ -1,65 +1,41 @@
-layui.use('element', function(){
-    var element = layui.element;
-
-});
-
-layui.use('layer', function(){
-    var $ = layui.$
-    var layer = layui.layer;
-
-    //触发事件
-    var active = {
-        offset: function(othis){
-            var type = othis.data('type');
-            layer.open({
-                type: 1//页面层,type=2--iframe层
-                ,area: '500px'
-                ,offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-                ,id: 'layerDemo'+type //防止重复弹出
-                ,content: $('#addDiv')
-                ,btn: '关闭全部'
-                ,btnAlign: 'c' //按钮居中
-//                    ,shade: 0 //不显示遮罩
-                ,yes: function(){
-                    layer.closeAll();
-                }
-            });
-        }
-    };
-
-    $('#layerDemo .layui-btn').on('click', function(){
-        var othis = $(this), method = othis.data('method');
-        active[method] ? active[method].call(this, othis) : '';
-    });
-
-    layer.msg('hello');
-});
-
 layui.use('table', function(){
-    var $ = layui.jquery;
+    var $ = layui.$;
     var table = layui.table;
 
     //方法级渲染
     table.render({
         elem: '#LAY_table_user'//指定原始表格元素选择器（
-        ,url: '/rent/testPage'//数据接口
-        ,id: 'testReload'
-        ,page: true//开启分页
+        , url: requestBaseUrl + '/landlord/list'//数据接口
+        , method: 'post'
+        , contentType: 'application/json'
+        , headers: header
+        , request: {
+            pageName: 'page' //页码的参数名称，默认：page
+            , limitName: 'rows' //每页数据量的参数名，默认：limit
+        } //如果无需自定义请求参数，可不加该参数
+        , response: {
+            statusName: 'code' //数据状态的字段名称，默认：code
+            , statusCode: 1 //成功的状态码，默认：0
+            , msgName: 'msg' //状态信息的字段名称，默认：msg
+            , countName: 'count' //数据总数的字段名称，默认：count
+            , dataName: 'data' //数据列表的字段名称，默认：data
+        } //如果无需自定义数据响应名称，可不加该参数
+        , id: 'LAY_table_user'
+        , page: true//开启分页
 //            ,height: 315//容器高度
-        ,cols: [[//表头
-            {checkbox: true, fixed: true}
-            ,{field:'id', title: 'ID', width:80, sort: true, fixed: true}
-            ,{field:'username', title: '用户名', width:80}
-            ,{field:'sex', title: '性别', width:80, sort: true}
-            ,{field:'city', title: '城市', width:80}
-            ,{field:'sign', title: '签名', width:80}
-            ,{field:'experience', title: '积分', sort: true, width:80}
-            ,{field:'score', title: '评分', sort: true, width:80}
-            ,{field:'classify', title: '职业', width:80}
-            ,{field:'wealth', title: '财富', sort: true, width:135}
-            ,{field:'', title: '操作', align:'center', toolbar: '#barDemo'}
+        , cols: [[//表头
+            {field: 'name', title: '姓名', sort: true, width: 200}
+            , {field: 'phone', title: '电话', sort: true, width: 150}
+            , {field: 'idCard', title: '身份证号', width: 200}
+            , {field: 'qq', title: 'QQ', width: 120}
+            , {field: 'wechat', title: '微信'}
+            , {field: 'email', title: 'email'}
+            , {field: '', title: '操作', align: 'left', toolbar: '#barDemo'}
         ]]
+        , done: function (res, curr, count) {
+        }
     });
+
 
     var active = {
         reload: function(){
@@ -79,9 +55,11 @@ layui.use('table', function(){
         }
     };
 
-    $('.demoTable .layui-btn').on('click', function(){
-        var type = $(this).data('type');
-        active[type] ? active[type].call(this) : '';
+    //绑定click点击事件
+    $('.childrenBody .layui-btn').on('click', function () {
+        var othis = $(this), method = othis.data('method');
+        // active.add();
+        active[method] ? active[method].call(this, othis) : '';
     });
 
 });

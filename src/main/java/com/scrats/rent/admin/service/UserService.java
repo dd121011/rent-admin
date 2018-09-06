@@ -2,9 +2,9 @@ package com.scrats.rent.admin.service;
 
 import com.scrats.rent.admin.base.service.BaseService;
 import com.scrats.rent.admin.common.JsonResult;
+import com.scrats.rent.admin.common.PageInfo;
 import com.scrats.rent.admin.entity.User;
 import com.scrats.rent.admin.mapper.UserMapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,6 +21,8 @@ public interface UserService extends BaseService<User, UserMapper> {
 
     JsonResult realCertification(Integer userId, String idCardPic, String idCardPicBack);
 
-    List<User> getListByUser(@Param("user") User user);
+    List<User> getListByUser(User user);
+
+    PageInfo<User> getPagerByUser(int page, int rows, User user);
 
 }
