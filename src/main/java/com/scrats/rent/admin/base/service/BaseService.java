@@ -168,4 +168,13 @@ public interface BaseService<T, D> {
      * @return: List<T>
      */
     List<T> findListBy(String property, Object value);
+
+    /**
+     * @description: 根据属性判断是否存在
+     * @author: lol
+     * @date: 2018/9/7 18:12
+     * @param: property-属性名, value-属性值
+     * @return: 存在返回true, 不存在返回false
+     */
+    boolean exists(String property, Object value);
 }
