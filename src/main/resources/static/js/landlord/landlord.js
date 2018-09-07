@@ -32,7 +32,7 @@ layui.use(['layer', 'table', 'form'], function () {
             , {field: 'qq', title: 'QQ', width: 120}
             , {field: 'wechat', title: '微信'}
             , {field: 'email', title: 'email'}
-            , {field: '', title: '操作', align: 'left', toolbar: '#barDemo'}
+            , {field: '', title: '操作', align: 'left', toolbar: '#landlordListBar'}
         ]]
         , done: function (res, curr, count) {
         }
