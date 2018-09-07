@@ -1,16 +1,14 @@
 package com.scrats.rent.admin.common.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.scrats.rent.admin.base.service.RedisService;
 import com.scrats.rent.admin.common.APIRequest;
 import com.scrats.rent.admin.common.annotation.IgnoreSecurity;
-import com.scrats.rent.admin.common.exception.BusinessException;
 import com.scrats.rent.admin.common.exception.NotAuthorizedException;
 import com.scrats.rent.admin.entity.Admin;
+import com.scrats.rent.admin.service.AdminService;
 import com.scrats.rent.admin.util.IOUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -27,12 +25,11 @@ import java.lang.reflect.Method;
  * @Author: lol.
  * @Date: 2018/6/8 16:54.
  */
+@Slf4j
 public class AuthenticationInterceptor  implements HandlerInterceptor {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
-    private RedisService redisService;
+    private AdminService adminService;
 
     /**
      * 在请求处理之前进行调用（Controller方法调用之前）
@@ -53,8 +50,8 @@ public class AuthenticationInterceptor  implements HandlerInterceptor {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         String requestPath = httpServletRequest.getRequestURI();
-        logger.debug("Method: " + method.getName() + ", IgnoreSecurity: " + method.isAnnotationPresent(IgnoreSecurity.class));
-        logger.debug("requestPath: " + requestPath);
+        log.debug("Method: " + method.getName() + ", IgnoreSecurity: " + method.isAnnotationPresent(IgnoreSecurity.class));
+        log.debug("requestPath: " + requestPath);
 
         if (method.isAnnotationPresent(IgnoreSecurity.class)) {
             return true;
@@ -62,25 +59,20 @@ public class AuthenticationInterceptor  implements HandlerInterceptor {
 
         String token = httpServletRequest.getHeader("tokenId");
         String adminId = httpServletRequest.getHeader("userId");
-        String json = IOUtil.getInputStreamAsText(httpServletRequest.getInputStream(),"UTF-8");
-        logger.debug("token: " + token);
+        log.debug("token: " + token);
         if (StringUtils.isBlank(token)) {
             throw new NotAuthorizedException("非法请求, 请登陆");
         }
         if (StringUtils.isBlank(adminId)) {
             throw new NotAuthorizedException("非法请求, 请登陆");
         }
+
+        String json = IOUtil.getInputStreamAsText(httpServletRequest.getInputStream(),"UTF-8");
         APIRequest apiRequest = JSON.parseObject(json,APIRequest.class);
         if(null == apiRequest){
             apiRequest = new APIRequest();
         }
-        Admin admin = (Admin) redisService.get(token);
-        if(null == admin){
-            throw new BusinessException("请求的tokenId无效, 请重新获取");
-        }
-        if(!adminId.equals(admin.getAdminId().toString())){
-            throw new BusinessException("请求的tokenId和userId验证不通过");
-        }
+        Admin admin = adminService.checkLogin(Integer.parseInt(adminId), token);
         apiRequest.setAdmin(admin);
         apiRequest.setTokenId(token);
 
