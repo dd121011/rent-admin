@@ -26,13 +26,13 @@ layui.use(['layer', 'table', 'form'], function () {
         , page: true//开启分页
 //            ,height: 315//容器高度
         , cols: [[//表头
-            {field: 'name', title: '姓名', sort: true, width: 220}
-            , {field: 'phone', title: '电话', sort: true, width: 110}
-            , {field: 'idCard', title: '身份证号', width: 120}
-            , {field: 'qq', title: 'QQ', width: 280}
+            {field: 'name', title: '姓名', sort: true, width: 200}
+            , {field: 'phone', title: '电话', sort: true, width: 150}
+            , {field: 'idCard', title: '身份证号', width: 200}
+            , {field: 'qq', title: 'QQ', width: 120}
             , {field: 'wechat', title: '微信'}
             , {field: 'email', title: 'email'}
-            , {field: '', title: '操作', align: 'left', toolbar: '#landlordListBar'}
+            , {field: '', title: '操作', align: 'left', toolbar: '#barDemo'}
         ]]
         , done: function (res, curr, count) {
         }
