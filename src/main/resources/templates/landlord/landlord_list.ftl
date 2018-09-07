@@ -37,8 +37,8 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-<script src="${base}/static/js/admin/landlord.js" charset="utf-8"></script>
+<script src="${base}/static/js/landlord/landlord.js" charset="utf-8"></script>
 
-<#include "admin/landlord_edit.ftl"/>
+<#include "landlord/landlord_edit.ftl"/>
 
 </html>

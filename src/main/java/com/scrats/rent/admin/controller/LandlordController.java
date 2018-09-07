@@ -45,7 +45,7 @@ public class LandlordController {
 
         map.put("admin", admin);
 
-        return "home";
+        return "landlord/landlord_list";
     }
 
     @PostMapping("/list")

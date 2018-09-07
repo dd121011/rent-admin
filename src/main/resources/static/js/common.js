@@ -16,7 +16,7 @@ layui.use(['element', 'layer', 'table', 'form'], function () {
             window.location.href = requestBaseUrl +  "/";
         },
         dashboardManage: function () {
-            window.location.href = requestBaseUrl +  "/landlord/goHome/" + userId + "?tokenId=" + tokenId;
+            window.location.href = requestBaseUrl +  "/admin/goHome/" + userId + "?tokenId=" + tokenId;
         },
         landlordManage: function () {
             window.location.href = requestBaseUrl +  "/landlord/goLandlord"+ "?userId=" + userId + "&tokenId=" + tokenId;

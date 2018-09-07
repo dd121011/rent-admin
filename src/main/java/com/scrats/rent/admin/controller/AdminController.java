@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import java.util.Map;
  */
 @Slf4j
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private RedisService redisService;
@@ -44,6 +46,6 @@ public class AdminController {
 
         map.put("admin","admin");
 
-        return "home";
+        return "admin/home";
     }
 }

@@ -22,7 +22,7 @@
 
 <script>
     if(undefined != tokenId && tokenId != null && tokenId != 'null'){
-        window.location.href = "${base}/goHome/" + userId + "?tokenId=" + tokenId;
+        window.location.href = "${base}/admin/goHome/" + userId + "?tokenId=" + tokenId;
     }
 </script>
 
@@ -81,7 +81,7 @@
                 if(res.code == 1){
                     $.cookie("rent_admin_tokenId",res.data.tokenId,{expires: 7, path: '/rent-admin'});
                     $.cookie("rent_admin_userId",res.data.userId,{expires: 7, path: '/rent-admin'});
-                    window.location.href = requestBaseUrl +  "/goHome/" + res.data.userId + "?tokenId=" + res.data.tokenId;
+                    window.location.href = requestBaseUrl +  "/admin/goHome/" + res.data.userId + "?tokenId=" + res.data.tokenId;
                 }else{
                     layer.alert(res.message);
                 }

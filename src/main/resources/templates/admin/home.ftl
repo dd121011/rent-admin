@@ -9,7 +9,7 @@
     <div class="layui-body childrenBody">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">
-            内容主体区域
+            这个是管理员首页
             <br><br>
             <blockquote class="layui-elem-quote">
             <form class="layui-form" lay-filter="landlordSearchFormFilter" action="">
@@ -40,6 +40,6 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-<script src="${base}/static/js/home.js" charset="utf-8"></script>
+<script src="${base}/static/js/admin/home.js" charset="utf-8"></script>
 
 </html>

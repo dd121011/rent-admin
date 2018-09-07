@@ -134,7 +134,6 @@ layui.use(['layer', 'table', 'form'], function () {
     //绑定click点击事件
     $('.childrenBody .layui-btn').on('click', function () {
         var othis = $(this), method = othis.data('method');
-        // active.add();
         active[method] ? active[method].call(this, othis) : '';
     });
 
