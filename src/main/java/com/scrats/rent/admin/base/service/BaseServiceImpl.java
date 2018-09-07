@@ -114,11 +114,11 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
             field.set(model, value);
             Field fieldDelete = modelClass.getDeclaredField("deleteTs");
             fieldDelete.setAccessible(true);
-            fieldDelete.setLong(model, 0);
+            fieldDelete.setLong(model, 0L);
             return dao.selectOne(model);
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
-            log.info("baseservice findBy error", e);
+            log.error("baseservice findBy error", e);
             //throw new ServiceException(e.getMessage(), e); 最好使用一个自定义异常
             throw new RuntimeException(e.getMessage(), e);
         }
@@ -137,19 +137,19 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
             field.set(model, value);
             Field fieldDelete = modelClass.getDeclaredField("deleteTs");
             fieldDelete.setAccessible(true);
-            fieldDelete.setLong(model, 0);
+            fieldDelete.setLong(model, 0L);
             return dao.select(model);
         } catch (InstantiationException e) {
             e.printStackTrace();
-            log.info("baseservice findListBy error", e);
+            log.error("baseservice findListBy error", e);
             throw new RuntimeException(e.getMessage(), e);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            log.info("baseservice findListBy error", e);
+            log.error("baseservice findListBy error", e);
             throw new RuntimeException(e.getMessage(), e);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
-            log.info("baseservice findListBy error", e);
+            log.error("baseservice findListBy error", e);
             throw new RuntimeException(e.getMessage(), e);
         }
     }
@@ -166,7 +166,7 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
             field.set(model, value);
             Field fieldDelete = clazz.getDeclaredField("deleteTs");
             fieldDelete.setAccessible(true);
-            fieldDelete.setLong(model, 0);
+            fieldDelete.setLong(model, 0L);
 
             List<T> list = dao.select(model);
             if(null == list || list.size() == 0){
@@ -174,15 +174,15 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
             }
         } catch (InstantiationException e) {
             e.printStackTrace();
-            log.info("baseservice findListBy error", e);
+            log.error("baseservice findListBy error", e);
             throw new RuntimeException(e.getMessage(), e);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            log.info("baseservice findListBy error", e);
+            log.error("baseservice findListBy error", e);
             throw new RuntimeException(e.getMessage(), e);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
-            log.info("baseservice findListBy error", e);
+            log.error("baseservice findListBy error", e);
             throw new RuntimeException(e.getMessage(), e);
         }
         return true;
