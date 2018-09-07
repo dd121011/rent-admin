@@ -19,8 +19,17 @@ layui.use(['layer', 'form'], function () {
                 }else{
                     layer.msg("添加成功");
                 }
-                // window.location.href = requestBaseUrl +  "/landlord/goBuilding/" + userId + "?tokenId=" + tokenId;
-                location.reload();
+                table.reload('lay_table_landlord', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        body: {
+                            name: $('#searchName').val(),
+                            phone: $('#searchPhone').val()
+                        }
+                    }//传参*/
+                });
             }else{
                 layer.alert(res.message);
             }

@@ -26,7 +26,7 @@ layui.use(['layer', 'table', 'form'], function () {
         , page: true//开启分页
 //            ,height: 315//容器高度
         , cols: [[//表头
-            {field: 'name', title: '姓名', sort: true, width: 200}
+            {field: 'name', title: '姓名', sort: true, width: 100}
             , {field: 'phone', title: '电话', sort: true, width: 150}
             , {field: 'idCard', title: '身份证号', width: 200}
             , {field: 'qq', title: 'QQ', width: 120}
@@ -38,20 +38,14 @@ layui.use(['layer', 'table', 'form'], function () {
         }
     });
 
-    //监听表格复选框选择
-    table.on('checkbox(landlordTableFilter)', function (obj) {
-        console.log(obj);
-        layer.alert("this is check all");
-    });
-
     //监听工具条
     table.on('tool(landlordTableFilter)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {
-            location.href= requestBaseUrl + "/room/goRoom/" + userId + "/" + data.adminId + "?tokenId=" + tokenId;
+            location.href= requestBaseUrl + "/room/goRoom/" + userId + "/" + data.userId + "?tokenId=" + tokenId;
         } else if (obj.event === 'del') {
             layer.confirm('真的删除行么', function (index) {
-                var jhxhr = $.ajax({url: requestBaseUrl + "/landlord/delete", data:{"ids": data.adminId}, headers: header, type: "POST"});
+                var jhxhr = $.ajax({url: requestBaseUrl + "/landlord/delete", data:{"ids": data.userId}, headers: header, type: "POST"});
                 jhxhr.done(function (res) {
                     if(res.code == 1){
                         layer.msg("删除成功");
@@ -64,10 +58,11 @@ layui.use(['layer', 'table', 'form'], function () {
             });
         } else if (obj.event === 'edit') {
             form.val("landlordFormFilter", {
-                "adminId": data.adminId
+                "userId": data.userId
                 ,"name": data.name
-                ,"address": data.address
-                ,"description": data.description
+                ,"phone": data.phone
+                ,"idCard": data.idCard
+                ,"remark": data.remark
             });
             active.edit();
         }
@@ -89,19 +84,13 @@ layui.use(['layer', 'table', 'form'], function () {
             });
         },
         add: function (othis) {
-            $("input[type!=checkbox]").val("");
-            $("select").val("");
-            $("[name='description']").val("");
-            $.each($('input[type=checkbox]'),function(){
-                $(this).attr("checked",false);
-                $(this).next().removeClass("layui-form-checked");
-            });
+            $("input").val("");
             // var type = othis.data('type');
             var type = "auto";
             layer.open({
                 type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                ,title: "新增楼盘"
-                , area: '800px'
+                ,title: "新增房东"
+                , area: '500px'
                 , offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                 , id: 'layerLandlordAdd' //防止重复弹出
                 , content: $('#addDiv')
@@ -116,7 +105,7 @@ layui.use(['layer', 'table', 'form'], function () {
         edit: function () {
             layer.open({
                 type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                ,title: "编辑楼盘"
+                ,title: "编辑房东"
                 , area: '500px'
                 , offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                 , id: 'layerLandlordEdit'  //防止重复弹出

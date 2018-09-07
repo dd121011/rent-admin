@@ -33,6 +33,7 @@
 <#include "footer.ftl"/>
 
 <script type="text/html" id="landlordListBar">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>

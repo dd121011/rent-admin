@@ -57,4 +57,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
         return new PageInfo<User>(list);
     }
 
+    @Override
+    public int deleteUserByIds(Integer... ids) {
+        long ts = System.currentTimeMillis();
+        return dao.deleteUserByIds(ts, ids);
+    }
+
 }

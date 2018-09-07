@@ -4,6 +4,7 @@ import com.scrats.rent.admin.base.mapper.BaseMapper;
 import com.scrats.rent.admin.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -37,4 +38,7 @@ public interface UserMapper extends BaseMapper<User> {
             "<if test='user.checkTs != null or user.checkTs > 0'>and checkTs > 0</if>" +
             "</script>")
     List<User> getListByUser(@Param("user") User user);
+
+    @Update("<script>update user u set u.delete_ts = #{deleteTs} where 1=1 and u.user_id in <foreach item='item' index='index' collection='ids' open='(' separator=',' close=')'> #{item} </foreach></script>")
+    int deleteUserByIds(@Param("deleteTs") long deleteTs, @Param("ids") Integer... ids);
 }

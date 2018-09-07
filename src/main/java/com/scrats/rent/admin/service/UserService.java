@@ -25,4 +25,6 @@ public interface UserService extends BaseService<User, UserMapper> {
 
     PageInfo<User> getPagerByUser(int page, int rows, User user);
 
+    int deleteUserByIds(Integer... ids);
+
 }
