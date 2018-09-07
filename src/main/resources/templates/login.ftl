@@ -17,7 +17,7 @@
     <script src="${base}/static/layui/layui.js" charset="utf-8"></script>
     <script src="${base}/static/js/extends/jquery.cookie.js"></script>
     <script src="${base}/static/js/public.js"></script>
-    <script src="${base}/static/js/admin/common.js"></script>
+    <script src="${base}/static/js/common.js"></script>
 </head>
 
 <script>
