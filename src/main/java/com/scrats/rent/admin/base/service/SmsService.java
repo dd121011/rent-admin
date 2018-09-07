@@ -2,8 +2,8 @@ package com.scrats.rent.admin.base.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.scrats.rent.admin.util.HttpRequestUtil;
-import com.scrats.rent.admin.util.MD5Util;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +40,8 @@ public class SmsService {
         long ts = System.currentTimeMillis();
         StringBuilder sb = new StringBuilder();
         sb.append(smsAppSecret).append(ts).append(tel);
-        String sign = MD5Util.md5(sb.toString());
+        //String sign = MD5Util.md5(sb.toString());
+        String sign = DigestUtils.md5Hex(sb.toString());
         String uri = String.format(smsSendUrl, tel, ts, sign.toUpperCase());
         log.info("========smsSendUrl========" + uri);
         Map<String, String> headerMap = new HashMap<>();
