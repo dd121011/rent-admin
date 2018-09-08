@@ -5,7 +5,7 @@ layui.use('table', function(){
     //方法级渲染
     table.render({
         elem: '#LAY_table_user'//指定原始表格元素选择器（
-        , url: requestBaseUrl + '/landlord/list'//数据接口
+        , url: requestBaseUrl + '/user/list'//数据接口
         , method: 'post'
         , contentType: 'application/json'
         , headers: header

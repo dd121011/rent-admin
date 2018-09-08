@@ -7,7 +7,7 @@ layui.use(['layer', 'table', 'form'], function () {
     //方法级渲染
     table.render({
         elem: '#lay_table_landlord'//指定原始表格元素选择器（
-        , url: requestBaseUrl + '/landlord/list'//数据接口
+        , url: requestBaseUrl + '/user/list'//数据接口
         , method: 'post'
         , contentType: 'application/json'
         , headers: header
@@ -45,7 +45,7 @@ layui.use(['layer', 'table', 'form'], function () {
             location.href= requestBaseUrl + "/room/goRoom/" + userId + "/" + data.userId + "?tokenId=" + tokenId;
         } else if (obj.event === 'del') {
             layer.confirm('真的删除行么', function (index) {
-                var jhxhr = $.ajax({url: requestBaseUrl + "/landlord/delete", data:{"ids": data.userId}, headers: header, type: "POST"});
+                var jhxhr = $.ajax({url: requestBaseUrl + "/user/delete", data:{"ids": data.userId}, headers: header, type: "POST"});
                 jhxhr.done(function (res) {
                     if(res.code == 1){
                         layer.msg("删除成功");

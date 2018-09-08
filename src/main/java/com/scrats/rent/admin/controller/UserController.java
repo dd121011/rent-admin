@@ -32,8 +32,8 @@ import java.util.*;
  */
 @Slf4j
 @Controller
-@RequestMapping("/landlord")
-public class LandlordController {
+@RequestMapping("/user")
+public class UserController {
     @Autowired
     private AdminService adminService;
     @Autowired
@@ -44,14 +44,14 @@ public class LandlordController {
     private AccountService accountService;
 
     @IgnoreSecurity
-    @GetMapping("/goLandlord")
+    @GetMapping("/goUser")
     public String goLandlord(Integer userId, String tokenId, Map<String, Object> map) {
 
         Admin admin = adminService.checkLogin(userId, tokenId);
 
         map.put("admin", admin);
 
-        return "landlord/landlord_list";
+        return "user/user_list";
     }
 
     @PostMapping("/list")

@@ -9,7 +9,7 @@ layui.use(['layer', 'form'], function () {
         var fromParams = $(data.form).serializeObject();
         params.body = fromParams;
         console.log(params);
-        var jhxhr = $.ajax({url: requestBaseUrl + "/landlord/edit", data: JSON.stringify(params), headers: header, contentType: 'application/json', type: "POST"});
+        var jhxhr = $.ajax({url: requestBaseUrl + "/user/edit", data: JSON.stringify(params), headers: header, contentType: 'application/json', type: "POST"});
         jhxhr.done(function (res) {
             if(res.code == 1){
                 layer.close(1);

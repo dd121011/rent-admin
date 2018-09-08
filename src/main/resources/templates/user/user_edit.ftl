@@ -39,4 +39,4 @@
     </form>
 </div>
 
-<script src="${base}/static/js/landlord/landlord_edit.js" charset="utf-8"></script>
+<script src="${base}/static/js/user/user_edit.js" charset="utf-8"></script>
