@@ -41,5 +41,6 @@
 <script src="${base}/static/js/user/user.js" charset="utf-8"></script>
 
 <#include "user/user_edit.ftl"/>
+<#include "user/user_detail.ftl"/>
 
 </html>

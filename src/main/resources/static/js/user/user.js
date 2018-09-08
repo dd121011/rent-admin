@@ -1,8 +1,9 @@
-layui.use(['layer', 'table', 'form'], function () {
+layui.use(['layer', 'table', 'form', 'laytpl'], function () {
     var $ = layui.$;
     var layer = layui.layer;
     var table = layui.table;
     var form = layui.form;
+    var laytpl = layui.laytpl;
 
     //方法级渲染
     table.render({
@@ -29,7 +30,9 @@ layui.use(['layer', 'table', 'form'], function () {
             {field: 'name', title: '姓名', sort: true, width: 100}
             , {field: 'phone', title: '电话', sort: true, width: 150}
             , {field: 'idCard', title: '身份证号', width: 200}
-            , {field: 'qq', title: 'QQ', width: 120}
+            , {field: 'check', title: '实名认证', width: 100, templet: function(d){
+                    return d.checkTs > 0 ? '已认证' : '未认证';
+                }}
             , {field: 'wechat', title: '微信'}
             , {field: 'email', title: 'email'}
             , {field: '', title: '操作', align: 'left', toolbar: '#landlordListBar'}
@@ -42,7 +45,24 @@ layui.use(['layer', 'table', 'form'], function () {
     table.on('tool(landlordTableFilter)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {
-            location.href= requestBaseUrl + "/room/goRoom/" + userId + "/" + data.userId + "?tokenId=" + tokenId;
+            data.createDate = new Date(data.createTs).Format('yyyy-MM-dd HH:mm:ss');
+            data.checkDate = data.checkTs > 0 ?new Date(data.checkTs).Format('yyyy-MM-dd HH:mm:ss') : '未认证';
+            var getTpl = userDetailTemplete.innerHTML;
+            var view = document.getElementById('userDetailTableTbody');
+            laytpl(getTpl).render(data, function(html){
+                view.innerHTML = html;
+            });
+            layer.open({
+                type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                ,title: "详细信息"
+                , area: '700px'
+                , offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                , id: 'layerUserDetail' //防止重复弹出
+                , content: $('#userDetailDiv')
+                , yes: function () {
+                    layer.closeAll();
+                }
+            });
         } else if (obj.event === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 var jhxhr = $.ajax({url: requestBaseUrl + "/user/delete", data:{"ids": data.userId}, headers: header, type: "POST"});
