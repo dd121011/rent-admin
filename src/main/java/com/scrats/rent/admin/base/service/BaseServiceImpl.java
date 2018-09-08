@@ -114,7 +114,7 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
             field.set(model, value);
             Field fieldDelete = modelClass.getDeclaredField("deleteTs");
             fieldDelete.setAccessible(true);
-            fieldDelete.setLong(model, 0L);
+            fieldDelete.set(model, 0L);
             return dao.selectOne(model);
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
@@ -137,7 +137,7 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
             field.set(model, value);
             Field fieldDelete = modelClass.getDeclaredField("deleteTs");
             fieldDelete.setAccessible(true);
-            fieldDelete.setLong(model, 0L);
+            fieldDelete.set(model, 0L);
             return dao.select(model);
         } catch (InstantiationException e) {
             e.printStackTrace();
@@ -166,7 +166,7 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
             field.set(model, value);
             Field fieldDelete = clazz.getDeclaredField("deleteTs");
             fieldDelete.setAccessible(true);
-            fieldDelete.setLong(model, 0L);
+            fieldDelete.set(model, 0L);
 
             List<T> list = dao.select(model);
             if(null == list || list.size() == 0){
