@@ -14,7 +14,7 @@ import org.apache.ibatis.annotations.Select;
 public interface AdminMapper extends BaseMapper<Admin> {
 
     @Select("select * from admin " +
-            "where 1=1 and username = #{username} and pwd = #{pwd}" +
+            "where 1=1 and username = #{username} and pwd = #{pwd} " +
             "limit 1")
     Admin login(Admin admin);
 
