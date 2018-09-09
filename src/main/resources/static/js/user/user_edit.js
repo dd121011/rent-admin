@@ -4,7 +4,7 @@ layui.use(['layer', 'form'], function () {
     var form = layui.form;
 
     //监听提交
-    form.on('submit(landlordEditFormSubmitFilter)', function(data){
+    form.on('submit(userEditFormSubmitFilter)', function(data){
         var params = {};
         var fromParams = $(data.form).serializeObject();
         params.body = fromParams;

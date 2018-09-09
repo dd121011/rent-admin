@@ -1,5 +1,5 @@
 <div id="addDiv" style="padding: 20px 0; padding-right: 40px; display: none" >
-    <form class="layui-form" id="testBuildingForm" lay-filter="landlordFormFilter" action="">
+    <form class="layui-form" id="testBuildingForm" lay-filter="userFormFilter" action="">
         <div class="layui-form-item" style="display: none">
             <label class="layui-form-label">id</label>
             <div class="layui-input-block">
@@ -32,7 +32,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="landlordEditFormSubmitFilter">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="userEditFormSubmitFilter">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>

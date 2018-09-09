@@ -7,7 +7,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
 
     //方法级渲染
     table.render({
-        elem: '#lay_table_landlord'//指定原始表格元素选择器（
+        elem: '#lay_table_user'//指定原始表格元素选择器（
         , url: requestBaseUrl + '/user/list'//数据接口
         , method: 'post'
         , contentType: 'application/json'
@@ -23,7 +23,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
             , countName: 'count' //数据总数的字段名称，默认：count
             , dataName: 'data' //数据列表的字段名称，默认：data
         } //如果无需自定义数据响应名称，可不加该参数
-        , id: 'lay_table_landlord'
+        , id: 'lay_table_user'
         , page: true//开启分页
 //            ,height: 315//容器高度
         , cols: [[//表头
@@ -35,14 +35,14 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 }}
             , {field: 'wechat', title: '微信'}
             , {field: 'email', title: 'email'}
-            , {field: '', title: '操作', align: 'left', toolbar: '#landlordListBar'}
+            , {field: '', title: '操作', align: 'left', toolbar: '#userListBar'}
         ]]
         , done: function (res, curr, count) {
         }
     });
 
     //监听行单击事件
-    table.on('rowDouble(landlordTableFilter)', function(obj){
+    table.on('rowDouble(userFormFilter)', function(obj){
         console.log(obj.tr); //得到当前行元素对象
         console.log(obj.data); //得到当前行数据
         active.detail(obj.data);
@@ -51,7 +51,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
     });
 
     //监听工具条
-    table.on('tool(landlordTableFilter)', function (obj) {
+    table.on('tool(userTableFilter)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {
             active.detail(data);
@@ -69,7 +69,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 layer.close(index);
             });
         } else if (obj.event === 'edit') {
-            form.val("landlordFormFilter", {
+            form.val("userFormFilter", {
                 "userId": data.userId
                 ,"name": data.name
                 ,"phone": data.phone
@@ -83,7 +83,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
     var active = {
         search: function () {
             //执行重载
-            table.reload('lay_table_landlord', {
+            table.reload('lay_table_user', {
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }
@@ -150,6 +150,9 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 }
             });
         },
+        realCheck: function () {
+            active.detail(this);
+        }
     };
 
     //绑定click点击事件

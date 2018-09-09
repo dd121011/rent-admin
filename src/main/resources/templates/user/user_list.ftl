@@ -9,7 +9,7 @@
     <div class="layui-body childrenBody">
 
         <blockquote class="layui-elem-quote">
-            <form class="layui-form" lay-filter="landlordSearchFormFilter" action="">
+            <form class="layui-form" lay-filter="userSearchFormFilter" action="">
                 <div class="layui-inline">
                     <div class="layui-input-inline">
                         <input type="text" name="name" id="searchName" placeholder="请输入房东名称" autocomplete="off" class="layui-input">
@@ -27,12 +27,12 @@
             </form>
         </blockquote>
         <hr class="layui-bg-green">
-        <table class="layui-hide" id="lay_table_landlord" lay-filter="landlordTableFilter"></table>
+        <table class="layui-hide" id="lay_table_user" lay-filter="userTableFilter"></table>
     </div>
 
 <#include "footer.ftl"/>
 
-<script type="text/html" id="landlordListBar">
+<script type="text/html" id="userListBar">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
