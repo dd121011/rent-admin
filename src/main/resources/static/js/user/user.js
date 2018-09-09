@@ -41,28 +41,20 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
         }
     });
 
+    //监听行单击事件
+    table.on('rowDouble(landlordTableFilter)', function(obj){
+        console.log(obj.tr); //得到当前行元素对象
+        console.log(obj.data); //得到当前行数据
+        active.detail(obj.data);
+        //obj.del(); //删除当前行
+        //obj.update(fields); //修改当前行数据
+    });
+
     //监听工具条
     table.on('tool(landlordTableFilter)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {
-            data.createDate = new Date(data.createTs).Format('yyyy-MM-dd HH:mm:ss');
-            data.checkDate = data.checkTs > 0 ?new Date(data.checkTs).Format('yyyy-MM-dd HH:mm:ss') : '未认证';
-            var getTpl = userDetailTemplete.innerHTML;
-            var view = document.getElementById('userDetailTableTbody');
-            laytpl(getTpl).render(data, function(html){
-                view.innerHTML = html;
-            });
-            layer.open({
-                type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                ,title: "详细信息"
-                , area: '700px'
-                , offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-                , id: 'layerUserDetail' //防止重复弹出
-                , content: $('#userDetailDiv')
-                , yes: function () {
-                    layer.closeAll();
-                }
-            });
+            active.detail(data);
         } else if (obj.event === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 var jhxhr = $.ajax({url: requestBaseUrl + "/user/delete", data:{"ids": data.userId}, headers: header, type: "POST"});
@@ -117,6 +109,26 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 , btn: '关闭全部'
                 , btnAlign: 'c' //按钮居中
 //                    ,shade: 0 //不显示遮罩
+                , yes: function () {
+                    layer.closeAll();
+                }
+            });
+        },
+        detail: function (data) {
+            data.createDate = new Date(data.createTs).Format('yyyy-MM-dd HH:mm:ss');
+            data.checkDate = data.checkTs > 0 ?new Date(data.checkTs).Format('yyyy-MM-dd HH:mm:ss') : '未认证';
+            var getTpl = userDetailTemplete.innerHTML;
+            var view = document.getElementById('userDetailTableTbody');
+            laytpl(getTpl).render(data, function(html){
+                view.innerHTML = html;
+            });
+            layer.open({
+                type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                ,title: "详细信息"
+                , area: '700px'
+                , offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                , id: 'layerUserDetail' //防止重复弹出
+                , content: $('#userDetailDiv')
                 , yes: function () {
                     layer.closeAll();
                 }
