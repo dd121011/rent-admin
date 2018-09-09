@@ -10,8 +10,8 @@ layui.use(['element', 'layer', 'table', 'form'], function () {
 
     var scratMenu = {
         userLogout: function () {
-            $.cookie("rent_admin_tokenId", null, {path: '/rent'})
-            $.cookie("rent_admin_userId", null, {path: '/rent'})
+            $.cookie("rent_admin_tokenId", null, {path: '/rent-admin'})
+            $.cookie("rent_admin_userId", null, {path: '/rent-admin'})
             tokenId = null;
             window.location.href = requestBaseUrl +  "/";
         },
