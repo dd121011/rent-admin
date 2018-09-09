@@ -45,7 +45,7 @@ public class UserController {
 
     @IgnoreSecurity
     @GetMapping("/goUser")
-    public String goLandlord(Integer userId, String tokenId, Map<String, Object> map) {
+    public String goUser(Integer userId, String tokenId, Map<String, Object> map) {
 
         Admin admin = adminService.checkLogin(userId, tokenId);
 
