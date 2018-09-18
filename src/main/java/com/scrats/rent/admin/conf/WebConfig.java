@@ -21,7 +21,6 @@ import java.util.List;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    //关键，将拦截器作为bean写入配置中
     @Bean
     public AuthenticationInterceptor getAuthenticationInterceptor() {
         return new AuthenticationInterceptor();
@@ -32,13 +31,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new APIRequestResolver();
     }
 
-    /**
-     * Description:  配置拦截器链
-     * Author: lol
-     * Date: 2017/8/28 16:13
-     * Params:
-     * return:
-     */
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("login");
+        super.addViewControllers(registry);
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getAuthenticationInterceptor()).addPathPatterns("/**").excludePathPatterns("/","/error");
@@ -50,14 +48,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         super.addArgumentResolvers(argumentResolvers);
     }
 
-    /**
-     * 以前要访问一个页面需要先创建个Controller控制类，再写方法跳转到页面
-     * 在这里配置后就不需要那么麻烦了,直接访问http://localhost:8080/toLogin就跳转到login.jsp页面了
-     * @param registry
-     */
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("login");
-        super.addViewControllers(registry);
-    }
 }
