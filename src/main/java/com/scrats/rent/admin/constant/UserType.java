@@ -13,9 +13,7 @@ public enum UserType {
 
     renter("租客", "6001"),
     landlord("房东", "6002"),
-    admin("管理员", "6003"),
-    guard("巡管员", "6004"),
-    administrator("超级管理员", "6005");
+    guard("巡管员", "6003");
 
     @Getter
     private String name;
