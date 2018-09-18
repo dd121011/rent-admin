@@ -31,7 +31,13 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
             , {field: 'phone', title: '电话', sort: true, width: 150}
             , {field: 'idCard', title: '身份证号', width: 200}
             , {field: 'check', title: '实名认证', width: 100, templet: function(d){
-                    return d.checkTs > 0 ? '已认证' : '未认证';
+                    if(d.checkTs > 0){
+                        return "已实名";
+                    }
+                    if(isNotEmpty(d.idCardPic) && isNotEmpty(d.idCardPicBack)){
+                        return "待认证";
+                    }
+                    return  '未认证';
                 }}
             , {field: 'wechat', title: '微信'}
             , {field: 'email', title: 'email'}
@@ -101,7 +107,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
             var type = "auto";
             layer.open({
                 type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                ,title: "新增房东"
+                ,title: "新增用户"
                 , area: '500px'
                 , offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                 , id: 'layerLandlordAdd' //防止重复弹出
@@ -137,7 +143,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
         edit: function () {
             layer.open({
                 type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                ,title: "编辑房东"
+                ,title: "编辑用户"
                 , area: '500px'
                 , offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                 , id: 'layerLandlordEdit'  //防止重复弹出
