@@ -124,6 +124,10 @@ function isEmpty(str) {
     return false;
 }
 
+function isNotEmpty(str) {
+    return !isEmpty(str);
+}
+
 function isEmptyArray(str) {
     if(undefined == str || null == str || str.length == 0){
         return true;
