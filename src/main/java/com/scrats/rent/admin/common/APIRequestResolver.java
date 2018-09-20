@@ -11,7 +11,7 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 
 /**
  * @Created with scrat.
- * @Description: 增加方法注入，将含有 @CurrentUser 注解的方法参数注入当前登录用户.
+ * @Description: 增加方法注入，将含有 @APIRequestControl 注解的方法参数注入当前登录用户.
  * @Email: guosq@scrats.cn.
  * @Author: lol.
  * @Date: 2018/6/8 17:19.

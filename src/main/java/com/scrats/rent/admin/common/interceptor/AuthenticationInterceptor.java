@@ -37,7 +37,7 @@ public class AuthenticationInterceptor  implements HandlerInterceptor {
      * @param httpServletRequest
      * @param httpServletResponse
      * @param handler
-     * @return
+     * @return 返回false终止request, 返回true才会往下进行
      * @throws Exception
      */
     @Override
