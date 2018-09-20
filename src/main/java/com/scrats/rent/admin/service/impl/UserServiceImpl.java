@@ -63,4 +63,16 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
         return dao.deleteUserByIds(ts, ids);
     }
 
+    @Override
+    public List<User> getListWithRoleByUser(User user, String roleCode) {
+        return dao.getListWithRoleByUser(user, roleCode);
+    }
+
+    @Override
+    public PageInfo<User> getPagerWithRoleByUser(int page, int rows, User user, String roleCode) {
+        PageHelper.startPage(page, rows);
+        List<User> list = dao.getListWithRoleByUser(user, roleCode);
+        return new PageInfo<User>(list);
+    }
+
 }

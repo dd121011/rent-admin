@@ -11,6 +11,14 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
         , url: requestBaseUrl + '/user/list'//数据接口
         , method: 'post'
         , contentType: 'application/json'
+        , where: {
+            body: {
+                name: $('#searchName').val(),
+                phone: $('#searchPhone').val(),
+                roleCode: $('#searchRoleCode').val(),
+                checkTs: $('#searchCheckTs').val()
+            }
+        }//传参*/
         , headers: header
         , request: {
             pageName: 'page' //页码的参数名称，默认：page
@@ -30,7 +38,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
             {field: 'name', title: '姓名', sort: true, width: 100}
             , {field: 'phone', title: '电话', sort: true, width: 150}
             , {field: 'idCard', title: '身份证号', width: 200}
-            , {field: 'check', title: '实名认证', width: 100, templet: function(d){
+            , {field: 'check', title: '实名认证', sort: true, width: 100, templet: function(d){
                     if(d.checkTs > 0){
                         return "已实名";
                     }
@@ -96,7 +104,9 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 , where: {
                     body: {
                         name: $('#searchName').val(),
-                        phone: $('#searchPhone').val()
+                        phone: $('#searchPhone').val(),
+                        roleCode: $('#searchRoleCode').val(),
+                        checkTs: $('#searchCheckTs').val()
                     }
                 }//传参*/
             });

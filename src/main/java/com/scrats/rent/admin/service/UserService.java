@@ -27,4 +27,8 @@ public interface UserService extends BaseService<User, UserMapper> {
 
     int deleteUserByIds(Integer... ids);
 
+    List<User> getListWithRoleByUser(User user, String roleCode);
+
+    PageInfo<User> getPagerWithRoleByUser(int page, int rows, User user, String roleCode);
+
 }

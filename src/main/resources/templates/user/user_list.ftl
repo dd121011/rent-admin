@@ -7,21 +7,33 @@
     <#include "menu.ftl" />
 
     <div class="layui-body childrenBody">
-
         <blockquote class="layui-elem-quote">
             <form class="layui-form" lay-filter="userSearchFormFilter" action="">
                 <div class="layui-inline">
                     <div class="layui-input-inline">
-                        <input type="text" name="name" id="searchName" placeholder="请输入房东名称" autocomplete="off" class="layui-input">
+                        <input type="text" name="name" id="searchName" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                     </div>
-                </div>
-                <div class="layui-inline">
                     <div class="layui-input-inline">
-                        <input type="text" name="phone" id="searchPhone" placeholder="请输入房东电话" autocomplete="off" class="layui-input">
+                        <input type="text" name="phone" id="searchPhone" placeholder="请输入电话" autocomplete="off" class="layui-input">
                     </div>
-                    <a class="layui-btn search_btn" data-method="search" data-type="auto">搜索</a>
+                    <div class="layui-input-inline">
+                        <select id="searchRoleCode"  lay-search="">
+                            <option value="" selected>全部</option>
+                            <#list roles as item>
+                                <option value="${item.dicItermCode}">${item.value}</option>
+                            </#list>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select id="searchCheckTs"  lay-search="">
+                            <option value="-1" selected>全部</option>
+                            <option value="1">已认证</option>
+                            <option value="0">未认证</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="layui-inline">
+                    <a class="layui-btn search_btn" data-method="search" data-type="auto">搜索</a>
                     <a data-method="add" data-type="auto" class="layui-btn layui-btn-normal">添加</a>
                 </div>
             </form>

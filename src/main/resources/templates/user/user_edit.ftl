@@ -7,6 +7,16 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <select id="type"  lay-search="">
+                    <#list roles as item>
+                        <option value="${item.dicItermCode}">${item.value}</option>
+                    </#list>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
                 <input type="text" name="name" required  lay-verify="required" placeholder="请输入房东名称" autocomplete="off" class="layui-input">

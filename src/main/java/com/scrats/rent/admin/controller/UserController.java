@@ -6,13 +6,12 @@ import com.scrats.rent.admin.common.JsonResult;
 import com.scrats.rent.admin.common.PageInfo;
 import com.scrats.rent.admin.common.annotation.APIRequestControl;
 import com.scrats.rent.admin.common.annotation.IgnoreSecurity;
+import com.scrats.rent.admin.constant.GlobalConst;
 import com.scrats.rent.admin.constant.UserType;
 import com.scrats.rent.admin.entity.*;
-import com.scrats.rent.admin.service.AccountService;
-import com.scrats.rent.admin.service.AdminService;
-import com.scrats.rent.admin.service.UserRoleService;
-import com.scrats.rent.admin.service.UserService;
+import com.scrats.rent.admin.service.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Created with scrat.
@@ -42,14 +42,18 @@ public class UserController {
     private UserRoleService userRoleService;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private DictionaryItermService dictionaryItermService;
 
     @IgnoreSecurity
     @GetMapping("/goUser")
     public String goUser(Integer userId, String tokenId, Map<String, Object> map) {
 
         Admin admin = adminService.checkLogin(userId, tokenId);
+        List<DictionaryIterm> roles = dictionaryItermService.findListBy("dicCode", GlobalConst.ROLE_CODE);
 
         map.put("admin", admin);
+        map.put("roles", roles);
 
         return "user/user_list";
     }
@@ -57,11 +61,17 @@ public class UserController {
     @PostMapping("/list")
     @ResponseBody
     public String list(@APIRequestControl APIRequest apiRequest) {
+        String roleCode = APIRequest.getParameterValue(apiRequest, "roleCode", null, String.class);
         User param = JSON.parseObject(JSON.toJSONString(apiRequest.getBody()),User.class);
         if(null == param){
             param = new User();
         }
-        PageInfo<User> pageInfo = userService.getPagerByUser(apiRequest.getPage(), apiRequest.getRows(), param);
+        PageInfo<User> pageInfo = null;
+        if(StringUtils.isEmpty(roleCode)){
+            pageInfo = userService.getPagerByUser(apiRequest.getPage(), apiRequest.getRows(), param);
+        }else{
+            pageInfo = userService.getPagerWithRoleByUser(apiRequest.getPage(), apiRequest.getRows(), param, roleCode);
+        }
 
         return JSON.toJSONString(new JsonResult<List>(pageInfo.getList(), (int) pageInfo.getTotal()));
     }
