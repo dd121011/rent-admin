@@ -135,7 +135,7 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
             Field field = modelClass.getDeclaredField(property);
             field.setAccessible(true);
             field.set(model, value);
-            Field fieldDelete = modelClass.getDeclaredField("deleteTs");
+            Field fieldDelete = modelClass.getSuperclass().getDeclaredField("deleteTs");
             fieldDelete.setAccessible(true);
             fieldDelete.set(model, 0L);
             return dao.select(model);
@@ -159,12 +159,11 @@ public class BaseServiceImpl<T, D extends BaseMapper<T>> implements BaseService<
         try {
             ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
             Class<T> modelClass = (Class<T>) pt.getActualTypeArguments()[0];
-            Class clazz = modelClass.getSuperclass();
             T model = modelClass.newInstance();
             Field field = modelClass.getDeclaredField(property);
             field.setAccessible(true);
             field.set(model, value);
-            Field fieldDelete = clazz.getDeclaredField("deleteTs");
+            Field fieldDelete = modelClass.getSuperclass().getDeclaredField("deleteTs");
             fieldDelete.setAccessible(true);
             fieldDelete.set(model, 0L);
 
