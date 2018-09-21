@@ -160,16 +160,20 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 }
                 , btn2: function(index, layero){
                     //按钮【按钮二】的回调
-                    var jhxhr = $.ajax({url: requestBaseUrl + "/user/realConfirm/" + data.userId, headers: header, contentType: 'application/json', type: "GET"});
-                    jhxhr.done(function (res) {
-                        console.log(res);
-                        if(res.code == 1){
-                            layer.close(1);
-                            layer.msg('实名认证成功!')
-                        }else{
-                            layer.alert(res.message);
-                        }
+                    layer.confirm('请再次确认实名认证通过', function (index) {
+                        var jhxhr = $.ajax({url: requestBaseUrl + "/user/realConfirm/" + data.userId, headers: header, contentType: 'application/json', type: "GET"});
+                        jhxhr.done(function (res) {
+                            console.log(res);
+                            if(res.code == 1){
+                                layer.close(1);
+                                layer.msg('实名认证成功!')
+                            }else{
+                                layer.alert(res.message);
+                            }
+                        });
+                        layer.close(index);
                     });
+
                 }
             });
         },
