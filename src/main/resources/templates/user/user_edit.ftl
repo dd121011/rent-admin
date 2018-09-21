@@ -1,21 +1,12 @@
 <div id="addDiv" style="padding: 20px 0; padding-right: 40px; display: none" >
-    <form class="layui-form" id="testBuildingForm" lay-filter="userFormFilter" action="">
+    <form class="layui-form" id="userEditForm" lay-filter="userFormFilter" action="">
         <div class="layui-form-item" style="display: none">
             <label class="layui-form-label">id</label>
             <div class="layui-input-block">
                 <input type="hidden" name="userId" autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">类型</label>
-            <div class="layui-input-block">
-                <select id="type"  lay-search="">
-                    <#list roles as item>
-                        <option value="${item.dicItermCode}">${item.value}</option>
-                    </#list>
-                </select>
-            </div>
-        </div>
+        <div id="ff"></div>
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
@@ -48,5 +39,18 @@
         </div>
     </form>
 </div>
+
+<script type="text/html" id="userEditUserRoleTemplete">
+    <div class="layui-form-item" id="roleCodeDiv">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block">
+            <select id="roleCode"  name="roleCode" lay-search="">
+                    <#list roles as item>
+                        <option value="${item.dicItermCode}">${item.value}</option>
+                    </#list>
+            </select>
+        </div>
+    </div>
+</script>
 
 <script src="${base}/static/js/user/user_edit.js" charset="utf-8"></script>

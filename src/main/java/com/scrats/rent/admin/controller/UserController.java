@@ -6,6 +6,7 @@ import com.scrats.rent.admin.common.JsonResult;
 import com.scrats.rent.admin.common.PageInfo;
 import com.scrats.rent.admin.common.annotation.APIRequestControl;
 import com.scrats.rent.admin.common.annotation.IgnoreSecurity;
+import com.scrats.rent.admin.common.exception.BusinessException;
 import com.scrats.rent.admin.constant.GlobalConst;
 import com.scrats.rent.admin.constant.UserType;
 import com.scrats.rent.admin.entity.*;
@@ -86,6 +87,11 @@ public class UserController {
             user.setUpdateTs(createTs);
             userService.updateByPrimaryKeySelective(user);
         }else{
+            String roleCode = APIRequest.getParameterValue(apiRequest, "roleCode", null, String.class);
+            UserType userType = UserType.fromValue(roleCode);
+            if(null == userType){
+                throw new BusinessException("请求参数有误");
+            }
             if(userService.exists("phone",user.getPhone())){
                 return new JsonResult<>("创建失败,该手机号已存在");
             }
@@ -101,7 +107,7 @@ public class UserController {
             user.setCreateTs(createTs);
             userService.insertSelective(user);
 
-            UserRole userRole = new UserRole(UserType.landlord, user.getUserId());
+            UserRole userRole = new UserRole(userType, user.getUserId());
             userRole.setCreateTs(createTs);
             userRoleService.insertSelective(userRole);
         }

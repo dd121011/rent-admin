@@ -83,6 +83,8 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 layer.close(index);
             });
         } else if (obj.event === 'edit') {
+
+            $('#userEditForm #roleCodeDiv').remove();
             form.val("userFormFilter", {
                 "userId": data.userId
                 ,"name": data.name
@@ -112,14 +114,16 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
             });
         },
         add: function (othis) {
+            var getTpl = userEditUserRoleTemplete.innerHTML;
+            $('#ff').html(getTpl);
+            form.render();
             $("input").val("");
             // var type = othis.data('type');
-            var type = "auto";
             layer.open({
                 type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                 ,title: "新增用户"
                 , area: '500px'
-                , offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                , offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                 , id: 'layerLandlordAdd' //防止重复弹出
                 , content: $('#addDiv')
                 , btn: '关闭全部'
@@ -127,6 +131,10 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
 //                    ,shade: 0 //不显示遮罩
                 , yes: function () {
                     layer.closeAll();
+                }
+                , success: function(layero, index){
+
+                    console.log(layero, index);
                 }
             });
         },
