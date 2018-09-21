@@ -16,10 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -119,6 +116,18 @@ public class UserController {
     @ResponseBody
     public JsonResult delete(@APIRequestControl APIRequest apiRequest, Integer... ids){
         userService.deleteUserByIds(ids);
+        return new JsonResult();
+    }
+
+    @GetMapping("/realConfirm/{userId}")
+    @ResponseBody
+    public JsonResult realConfirm(@PathVariable Integer userId){
+        User user = userService.selectByPrimaryKey(userId);
+        if(StringUtils.isEmpty(user.getIdCardPic() ) || StringUtils.isEmpty(user.getIdCardPicBack())){
+            throw new BusinessException("身份证图片不完整, 认证不通过!");
+        }
+        user.setCheckTs(System.currentTimeMillis());
+        userService.updateByPrimaryKeySelective(user);
         return new JsonResult();
     }
 }

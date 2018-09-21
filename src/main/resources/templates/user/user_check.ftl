@@ -1,12 +1,12 @@
-<div id="userDetailDiv" style="padding: 10px 40px; display: none" >
-    <form class="layui-form" lay-filter="roomBarginFormFilter" action="">
+<div id="userCheckDiv" style="padding: 10px 40px; display: none" >
+    <form class="layui-form" lay-filter="userCheckFormFilter" action="">
         <table class="layui-table" style="margin: 0" lay-even lay-skin="line">
-            <tbody id="userDetailTableTbody"></tbody>
+            <tbody id="userCheckTableTbody"></tbody>
         </table>
     </form>
 </div>
 
-<script type="text/html" id="userDetailTemplete">
+<script type="text/html" id="userCheckTemplete">
     <tr>
         <th>姓名：</th>
         <td>{{ d.name }}</td>

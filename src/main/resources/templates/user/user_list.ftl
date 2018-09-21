@@ -57,5 +57,6 @@
 
 <#include "user/user_edit.ftl"/>
 <#include "user/user_detail.ftl"/>
+<#include "user/user_check.ftl"/>
 
 </html>

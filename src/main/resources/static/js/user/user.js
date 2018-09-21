@@ -48,7 +48,6 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                     return  '未认证';
                 }}
             , {field: 'wechat', title: '微信'}
-            , {field: 'email', title: 'email'}
             , {field: '', title: '操作', align: 'left', toolbar: '#userListBar'}
         ]]
         , done: function (res, curr, count) {
@@ -68,7 +67,7 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
     table.on('tool(userTableFilter)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {
-            active.detail(data);
+            active.realCheck(data);
         } else if (obj.event === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 var jhxhr = $.ajax({url: requestBaseUrl + "/user/delete", data:{"ids": data.userId}, headers: header, type: "POST"});
@@ -83,7 +82,6 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 layer.close(index);
             });
         } else if (obj.event === 'edit') {
-
             $('#userEditForm #roleCodeDiv').remove();
             form.val("userFormFilter", {
                 "userId": data.userId
@@ -93,6 +91,8 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 ,"remark": data.remark
             });
             active.edit();
+        } else if (obj.event === 'realCheck') {
+            active.realCheck(data);
         }
     });
 
@@ -138,23 +138,38 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 }
             });
         },
-        detail: function (data) {
+        realCheck: function (data) {
             data.createDate = new Date(data.createTs).Format('yyyy-MM-dd HH:mm:ss');
             data.checkDate = data.checkTs > 0 ?new Date(data.checkTs).Format('yyyy-MM-dd HH:mm:ss') : '未认证';
-            var getTpl = userDetailTemplete.innerHTML;
-            var view = document.getElementById('userDetailTableTbody');
+            var getTpl = userCheckTemplete.innerHTML;
+            var view = document.getElementById('userCheckTableTbody');
             laytpl(getTpl).render(data, function(html){
                 view.innerHTML = html;
             });
             layer.open({
                 type: 1//0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                ,title: "详细信息"
+                ,title: "实名认证"
                 , area: '700px'
                 , offset: 'auto' //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-                , id: 'layerUserDetail' //防止重复弹出
-                , content: $('#userDetailDiv')
+                , id: 'layerUserCheck' //防止重复弹出
+                , content: $('#userCheckDiv')
+                , btn: ['取消', '认证通过']
+                , btnAlign: 'c'
                 , yes: function () {
                     layer.closeAll();
+                }
+                , btn2: function(index, layero){
+                    //按钮【按钮二】的回调
+                    var jhxhr = $.ajax({url: requestBaseUrl + "/user/realConfirm/" + data.userId, headers: header, contentType: 'application/json', type: "GET"});
+                    jhxhr.done(function (res) {
+                        console.log(res);
+                        if(res.code == 1){
+                            layer.close(1);
+                            layer.msg('实名认证成功!')
+                        }else{
+                            layer.alert(res.message);
+                        }
+                    });
                 }
             });
         },
@@ -174,9 +189,6 @@ layui.use(['layer', 'table', 'form', 'laytpl'], function () {
                 }
             });
         },
-        realCheck: function () {
-            active.detail(this);
-        }
     };
 
     //绑定click点击事件
