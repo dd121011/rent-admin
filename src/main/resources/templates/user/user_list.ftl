@@ -48,6 +48,9 @@
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    {{#  if(d.checkTs == 0){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="realCheck">实名认证</a>
+    {{#  } }}
 </script>
 
 <script src="${base}/static/js/user/user.js" charset="utf-8"></script>
